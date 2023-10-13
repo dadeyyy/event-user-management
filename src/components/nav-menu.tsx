@@ -5,8 +5,8 @@ import SignOut from './sign-out';
 
 async function SideNav() {
   const session = await getServerSession(options);
-  
-  if (session && session.user){
+
+  if (session && session.user) {
     return (
       <div className="min-h-screen flex flex-row bg-gray-100 shadow-lg">
         <div className="flex flex-col w-56 bg-white overflow-hidden">
@@ -14,8 +14,7 @@ async function SideNav() {
             <h1 className="text-3xl uppercase text-indigo-500">Admin</h1>
           </div>
           <ul className="flex flex-col py-4">
-            
-          {session.user.role ==="ADMIN" &&(
+            {session.user.role === 'ADMIN' && (
               <li>
                 <Link
                   href="/users"
@@ -29,8 +28,6 @@ async function SideNav() {
                 </Link>
               </li>
             )}
-
-
 
             <li>
               <Link
@@ -60,7 +57,7 @@ async function SideNav() {
     );
   }
 
-  return <></>;
+
 }
 
 export default function NavMenu() {
