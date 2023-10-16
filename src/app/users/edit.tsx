@@ -1,22 +1,20 @@
-'use client';
-import { useState } from 'react';
-import Modal from '@/components/modal';
-import { useForm } from 'react-hook-form';
-import { TUserSchema, userSchema } from '@/lib/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import toast from 'react-hot-toast';
-import {useRouter} from 'next/navigation';
-import { User } from '@prisma/client';
-
+"use client";
+import { useState } from "react";
+import Modal from "@/components/modal";
+import { useForm } from "react-hook-form";
+import { TUserSchema, userSchema } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { User } from "@prisma/client";
 
 type EditUserProps = {
-  user: User
-}
+  user: User;
+};
 
-
-function EditUser({user}: EditUserProps) {
+function EditUser({ user }: EditUserProps) {
   //modal state
-  const router = useRouter()
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
@@ -37,10 +35,10 @@ function EditUser({user}: EditUserProps) {
   });
 
   const onSubmit = async (data: TUserSchema) => {
-    const response = await fetch('/api/server/editUser', {
-      method: 'PUT',
+    const response = await fetch("/api/server/editUser", {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         ...data,
@@ -55,15 +53,15 @@ function EditUser({user}: EditUserProps) {
       toast.error(`${error}`);
       return;
     }
-        toast.success("Successfully created a new user!")
-        closeModal()
-        router.refresh()
-        return
+    toast.success("Successfully created a new user!");
+    closeModal();
+    router.refresh();
+    return;
   };
 
   return (
     <div className="AddUser">
-      <button onClick={openModal} >
+      <button className="badge badge-flat-success" onClick={openModal}>
         Edit User
       </button>
 
@@ -72,52 +70,53 @@ function EditUser({user}: EditUserProps) {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-y-2"
         >
-          <div>
+          <h1 className="text-center font-bold">EDIT USER</h1>
+          <div className="flex flex-col">
             <label htmlFor="username">Username</label>
             <input
-            defaultValue={user.username}
+              defaultValue={user.username}
               id="username"
               type="text"
               placeholder="Username"
-              className="px-4 py-2 rounded"
-              {...register('username')}
+              className="input input-solid max-w-full"
+              {...register("username")}
             />
             {errors.username && (
               <p className="text-red-500">{`${errors.username.message}`}</p>
             )}
           </div>
 
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="password">Password</label>
             <input
               id="password"
               type="password"
               placeholder="password"
-              className="px-4 py-2 rounded"
-              {...register('password')}
+              className="input input-solid max-w-full"
+              {...register("password")}
             />
             {errors.password && (
               <p className="text-red-500">{`${errors.password.message}`}</p>
             )}
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="email">Email</label>
             <input
               defaultValue={user.email}
               id="email"
               type="email"
               placeholder="Email"
-              className="px-4 py-2 rounded ml-10"
-              {...register('email')}
+              className="input input-solid max-w-full"
+              {...register("email")}
             />
             {errors.email && (
               <p className="text-red-500">{`${errors.email.message}`}</p>
             )}
           </div>
 
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="role">Role</label>
-            <select id="role" defaultValue={user.role} {...register('role')}>
+            <select className="select select-solid max-w-full" id="role" defaultValue={user.role} {...register("role")}>
               <option value="USER">USER</option>
               <option value="ADMIN">ADMIN</option>
             </select>
@@ -125,18 +124,20 @@ function EditUser({user}: EditUserProps) {
           <button
             disabled={isSubmitting}
             type="submit"
-            className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
+            className="btn btn-primary"
           >
-            Submit
+            Save Changes
           </button>
+
+          <button
+          onClick={closeModal}
+          className="btn btn-error btn-sm w-1/5"
+        >
+          Close
+        </button>
         </form>
 
-        <button
-          onClick={closeModal}
-          className="bg-gray-300 text-gray-700 px-3 py-1 mt-4"
-        >
-          Close Modal
-        </button>
+       
       </Modal>
     </div>
   );

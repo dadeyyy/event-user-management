@@ -1,3 +1,4 @@
+'use client'
 import QRCode from "./qrcode";
 
 export default function GenerateQRPage({

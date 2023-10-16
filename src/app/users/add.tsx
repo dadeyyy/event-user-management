@@ -1,16 +1,15 @@
-'use client';
-import { useState } from 'react';
-import Modal from '@/components/modal';
-import { useForm } from 'react-hook-form';
-import { TUserSchema, userSchema } from '@/lib/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import toast from 'react-hot-toast';
-import {useRouter} from 'next/navigation';
-
+"use client";
+import { useState } from "react";
+import Modal from "@/components/modal";
+import { useForm } from "react-hook-form";
+import { TUserSchema, userSchema } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function AddUser() {
   //modal state
-    const router = useRouter()
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
@@ -31,12 +30,12 @@ function AddUser() {
   });
 
   const onSubmit = async (data: TUserSchema) => {
-    const response = await fetch('/api/server/addUser', {
-      method: 'POST',
+    const response = await fetch("/api/server/addUser", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     const responseData = await response.json();
     console.log(responseData);
@@ -46,15 +45,15 @@ function AddUser() {
       toast.error(`${error}`);
       return;
     }
-        toast.success("Successfully created a new user!")
-        closeModal()
-        router.refresh()
-        return
+    toast.success("Successfully created a new user!");
+    closeModal();
+    router.refresh();
+    return;
   };
 
   return (
     <div className="AddUser">
-      <button onClick={openModal} className="bg-blue-500 text-white p-2">
+      <button onClick={openModal} className="btn btn-primary">
         Add User
       </button>
 
@@ -63,14 +62,15 @@ function AddUser() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-y-2"
         >
+          <h1 className="text-center font-bold">ADD USER</h1>
           <div>
             <label htmlFor="username">Username</label>
             <input
               id="username"
               type="text"
               placeholder="Username"
-              className="px-4 py-2 rounded"
-              {...register('username')}
+              className="input input-solid max-w-full"
+              {...register("username")}
             />
             {errors.username && (
               <p className="text-red-500">{`${errors.username.message}`}</p>
@@ -83,8 +83,8 @@ function AddUser() {
               id="password"
               type="password"
               placeholder="password"
-              className="px-4 py-2 rounded"
-              {...register('password')}
+              className="input input-solid max-w-full"
+              {...register("password")}
             />
             {errors.password && (
               <p className="text-red-500">{`${errors.password.message}`}</p>
@@ -96,8 +96,8 @@ function AddUser() {
               id="email"
               type="email"
               placeholder="Email"
-              className="px-4 py-2 rounded ml-10"
-              {...register('email')}
+              className="input input-solid max-w-full"
+              {...register("email")}
             />
             {errors.email && (
               <p className="text-red-500">{`${errors.email.message}`}</p>
@@ -106,7 +106,12 @@ function AddUser() {
 
           <div>
             <label htmlFor="role">Role</label>
-            <select id="role" defaultValue="USER" {...register('role')}>
+            <select
+              className="select select-solid max-w-full"
+              id="role"
+              defaultValue="USER"
+              {...register("role")}
+            >
               <option value="USER">USER</option>
               <option value="ADMIN">ADMIN</option>
             </select>
@@ -114,18 +119,14 @@ function AddUser() {
           <button
             disabled={isSubmitting}
             type="submit"
-            className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
+            className="btn btn-primary max-w-full disabled:bg-gray-300"
           >
-            Submit
+            Add
+          </button>
+          <button onClick={closeModal} className="btn btn-error btn-sm w-1/5">
+            Close
           </button>
         </form>
-
-        <button
-          onClick={closeModal}
-          className="bg-gray-300 text-gray-700 px-3 py-1 mt-4"
-        >
-          Close Modal
-        </button>
       </Modal>
     </div>
   );

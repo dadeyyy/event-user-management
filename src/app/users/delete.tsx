@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { revalidatePath } from 'next/cache';
-import Link from 'next/link';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import Modal from '@/components/modal';
+import { revalidatePath } from "next/cache";
+import Link from "next/link";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Modal from "@/components/modal";
 export type Tuser = {
   id: number;
 };
@@ -22,45 +22,42 @@ export default function DeleteUser({ id }: Tuser) {
   };
 
   const handleOnClick = async () => {
-    const response = fetch('/api/server/deleteUser', {
+    const response = fetch("/api/server/deleteUser", {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      method: 'DELETE',
+      method: "DELETE",
       body: JSON.stringify({ id }),
     });
 
     const toasts = toast.promise(response, {
-      loading: 'Loading',
+      loading: "Loading",
       success: `Succcessfully Deleted!`,
-      error: 'Failed to delete',
+      error: "Failed to delete",
     });
 
-    await toasts
-    closeModal()
+    await toasts;
+    closeModal();
     router.refresh();
-
   };
 
   return (
     <>
-      <button onClick={openModal}>Delete</button>
+      <button className="badge badge-flat-error" onClick={openModal}>
+        Delete
+      </button>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <div className="flex flex-col gap-y-2 ">
-          <h1>Do you want to delete this user?</h1>
+        <div className="flex flex-col gap-y-2 text-slate-900">
+          <h1>
+            Do you want to <b>delete</b> this user?
+          </h1>
 
-          <div >
-            <button
-              onClick={handleOnClick}
-              className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
-            >
+          <div className="flex gap-2">
+            <button onClick={handleOnClick} className="btn btn-error btn-block">
               Delete
             </button>
-            <button
-              onClick={closeModal}
-              className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
-            >
+            <button onClick={closeModal} className="btn btn-block">
               No
             </button>
           </div>
