@@ -5,9 +5,16 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        sidebar: "300px auto", // 👈 for sidebar layout. adds grid-cols-sidebar class
+      }, 
+      gridTemplateRows: {
+        header: "64px auto", // 👈 for the navbar layout. adds grid-rows-header class
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -15,6 +22,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("rippleui")],
 }
 export default config
