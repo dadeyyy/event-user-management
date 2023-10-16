@@ -55,11 +55,14 @@ function SideNav() {
                         href={href}
                         className={
                           checkActivePath(href)
-                            ? "bg-blue-300 rounded-full active"
+                            ? "bg-slate-200 font-bold rounded-md active"
                             : ""
                         }
                       >
-                        <li key={href} className="menu-item">
+                        <li
+                          key={href}
+                          className="menu-item hover:bg-slate-200  "
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -84,11 +87,11 @@ function SideNav() {
                       href={href}
                       className={
                         checkActivePath(href)
-                          ? "bg-blue-300 rounded-full active"
+                          ? "bg-slate-200 font-bold rounded-md active"
                           : ""
                       }
                     >
-                      <li key={href} className="menu-item">
+                      <li key={href} className="menu-item hover:bg-slate-200  ">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

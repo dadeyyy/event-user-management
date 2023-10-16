@@ -10,7 +10,6 @@ export default async function Home() {
     return (
       <div className="flex items-center justify-center h-full mx-auto">
         <h1 className="font-bold lg:text-6xl md:text-3xl sm:text-xl" >{`Hello ${session.user.name}!`}</h1>
-
       </div>
       )
   }
