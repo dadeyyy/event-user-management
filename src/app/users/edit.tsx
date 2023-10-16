@@ -40,7 +40,10 @@ function EditUser({ user }: EditUserProps) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        id:user.id
+      })
     });
     const responseData = await response.json();
     console.log(responseData);

@@ -27,14 +27,47 @@ model User {
   updatedAt DateTime? @updatedAt
 }
 
-model Employees{
+
+enum EventStatus{
+  PLANNED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum detailedBool{
+  true
+  false
+}
+
+model Event{
   id Int @id @default(autoincrement())
-  lastName String 
+  name String
+  date DateTime
+  status EventStatus
+  attendees EventAttendee[]
+}
+
+model Employee{
+  id Int @id @default(autoincrement())
+  lastName String
   firstName String
-  ExtName String
+  extName String?
   middleName String
   position String
   office String
   officeAssignment String
-  detailed Boolean
- }
+  detailed detailedBool
+  role String
+  attendance EventAttendee[]
+}
+
+model EventAttendee {
+  id Int @id @default(autoincrement())
+  employee Employee @relation(fields: [employee_id], references: [id])
+  employee_id Int
+  event_id Int
+  event Event @relation(fields: [event_id], references: [id])
+
+  @@unique([employee_id, event_id])
+}

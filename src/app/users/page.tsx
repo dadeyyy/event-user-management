@@ -1,15 +1,20 @@
-import { Metadata } from "next";
-import prisma from "@/lib/prisma";
-import Link from "next/link";
-import DeleteUser from "./delete";
-import EditUser from "./edit";
-import AddUser from "./add";
+import { Metadata } from 'next';
+import prisma from '@/lib/prisma';
+import Link from 'next/link';
+import DeleteUser from './delete';
+import EditUser from './edit';
+import AddUser from './add';
+import { getServerSession } from 'next-auth';
+import { options } from '../api/auth/[...nextauth]/options';
+import NotFound from '@/components/not-found';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: "Users",
 };
 
 export default async function UsersPage() {
+  const session = await getServerSession(options);
   const allUsers = await prisma.user.findMany();
 
   const sortedUsers = allUsers.sort((a, b) => {
