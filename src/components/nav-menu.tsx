@@ -31,6 +31,19 @@ async function SideNav() {
 
             <li>
               <Link
+                href="/events"
+                className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+              >
+                <span className="inline-flex items-center justify-center h-12 w-12 text-xl text-gray-400">
+                  <i className="bx bx-home"></i>
+                </span>
+
+                <span className="text-lg font-medium">Events</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link
                 href="/employees"
                 className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
               >
@@ -56,8 +69,6 @@ async function SideNav() {
       </div>
     );
   }
-
-
 }
 
 export default function NavMenu() {
