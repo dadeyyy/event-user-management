@@ -16,7 +16,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     : 'hidden';
 
   return (
-    <div>
+    <div className=''>
       <div className={overlayClassName} onClick={onClose}></div>
       <div className={modalClassName}>
         <div className="modal-container bg-white rounded-lg shadow-lg p-4">
