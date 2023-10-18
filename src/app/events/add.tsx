@@ -45,7 +45,7 @@ function AddEvent() {
       toast.error(`${error}`);
       return;
     }
-    toast.success('Successfully created a new user!');
+    toast.success('Successfully created a new event!');
     closeModal();
     router.refresh();
     return;
@@ -53,7 +53,7 @@ function AddEvent() {
 
   return (
     <div className="AddEvent">
-      <button onClick={openModal} className="bg-blue-500 text-white p-2">
+      <button onClick={openModal} className="btn btn-primary">
         Add Event
       </button>
 
@@ -62,13 +62,14 @@ function AddEvent() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-y-2"
         >
+          <h1 className="text-center font-bold">ADD EVENT</h1>
           <div>
             <label htmlFor="username">Name</label>
             <input
               id="name"
               type="text"
               placeholder="Name"
-              className="px-4 py-2 rounded"
+              className="input input-solid max-w-full"
               {...register('name')}
             />
             {errors.name && (
@@ -82,7 +83,7 @@ function AddEvent() {
               id="date"
               type="date"
               placeholder="date"
-              className="px-4 py-2 rounded"
+              className="input input-solid max-w-full"
               {...register('date')}
             />
             {errors.date && (
@@ -93,28 +94,31 @@ function AddEvent() {
 
           <div>
             <label htmlFor="status">Status</label>
-            <select id="status" defaultValue="PLANNED" {...register('status')}>
+            <select className='select select-solid max-w-full' id="status" defaultValue="PLANNED" {...register('status')}>
               <option value="PLANNED">PLANNED</option>
               <option value="ONGOING">ONGOING</option>
               <option value="COMPLETED">COMPLETED</option>
               <option value="CANCELLED">CANCELLED</option>
             </select>
           </div>
+          <div className="flex flex-row w-full gap-1 mt-2">
           <button
             disabled={isSubmitting}
             type="submit"
-            className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
+            className="btn btn-primary w-full disabled:bg-gray-400"
           >
-            Submit
+            Add
           </button>
+          <button
+          onClick={closeModal}
+          className="btn btn-error w-full"
+        >
+          Close
+        </button>
+        </div>
         </form>
 
-        <button
-          onClick={closeModal}
-          className="bg-gray-300 text-gray-700 px-3 py-1 mt-4"
-        >
-          Close Modal
-        </button>
+        
       </Modal>
     </div>
   );
