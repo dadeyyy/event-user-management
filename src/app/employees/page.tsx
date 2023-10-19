@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
-import DeleteEmployee from "./delete";
-import EditEmployee from "./edit";
 import AddEmployee from "./add";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";

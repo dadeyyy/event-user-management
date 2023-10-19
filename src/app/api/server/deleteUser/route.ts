@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Tuser } from '@/app/users/delete';
 import prisma from '@/lib/prisma';
-import { revalidateTag } from 'next/cache';
 
 export async function DELETE(request: Request) {
   try {

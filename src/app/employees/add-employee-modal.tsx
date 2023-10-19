@@ -18,8 +18,7 @@ const AddEmployeeModal = ({ closeModal, open }: AddEmployeeProps) => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors, isSubmitting, isLoading },
+    formState: { errors, isSubmitting },
   } = useForm<TEmployeeSchema>({
     resolver: zodResolver(employeeSchema),
   });

@@ -1,11 +1,13 @@
-import { Metadata } from "next";
-import prisma from "@/lib/prisma";
-import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
-import AddEvent from "./add";
-import NotFound from "@/components/not-found";
+import { Metadata } from 'next';
+import prisma from '@/lib/prisma';
+import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { options } from '../api/auth/[...nextauth]/options';
+import { redirect } from 'next/navigation';
+import AddEvent from './add';
+import NotFound from '@/components/not-found';
+import EditEvent from './edit';
+import DeleteEvent from './delete';
 
 export const metadata: Metadata = {
   title: "Users",
@@ -36,7 +38,7 @@ export default async function UsersPage() {
               {allEvents.map((event) => (
                 <tr key={event.id}>
                   <td>
-                    <Link href={`/`}>{event.id}</Link>
+                    <Link href={`/events/${event.id}`}>{event.id}</Link>
                   </td>
                   <td>{event.name}</td>
                   <td>{event.date.toString().split(":00 GMT")[0]}</td>
@@ -53,7 +55,8 @@ export default async function UsersPage() {
                     <div className="badge badge-primary">{event.status}</div>
                   ) : ""}
                   </td>
-                  <td>Edit</td>
+                  <td><EditEvent event={event}/></td>
+                  <td><DeleteEvent id={event.id}/></td>
                 </tr>
               ))}
             </tbody>

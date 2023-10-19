@@ -33,14 +33,16 @@ export type TeventSchema = z.infer<typeof eventSchema>
 export const employeeSchema = z.object({
     id: z.number().optional(),
     lastName: z.string().min(3, "lastName must be atleast 3 characters"),
-    firstName: z.string(),
+    firstName: z.string().min(1, {message:"Role is required"}),
     extName: z.string().optional(),
-    middleName: z.string(),
-    position: z.string(),
-    office: z.string(),
-    officeAssignment: z.string(),
+    middleName: z.string().min(1, {message:"Middle name is required"}),
+    position: z.string().min(1, {message:"position is required"}),
+    office: z.string().min(1, {message:"Office is required"}),
+    officeAssignment: z.string().min(1, {message:"Office Assignment is required"}),
     detailed: z.enum(["true", "false"]),
-    role: z.string()
+    role: z.string().min(1, {message:"Role is required"})
 })
 
 export type TEmployeeSchema = z.infer<typeof employeeSchema>
+
+
