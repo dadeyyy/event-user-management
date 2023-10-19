@@ -14,7 +14,7 @@ export default function QRCode({id}:{id:number}) {
         scale: 4,
         width: 150,
         color: {
-          dark: '#135080',
+          dark: '#000000',
           light: '#FFFFFF',
         },
       }}

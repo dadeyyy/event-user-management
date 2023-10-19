@@ -6,6 +6,8 @@ import { options } from '../api/auth/[...nextauth]/options';
 import { redirect } from 'next/navigation';
 import AddEvent from './add';
 import NotFound from '@/components/not-found';
+import EditEvent from './edit';
+import DeleteEvent from './delete';
 
 export const metadata: Metadata = {
   title: 'Users',
@@ -49,7 +51,7 @@ export default async function UsersPage() {
                         className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700"
                       >
                         <td className="whitespace-nowrap px-6 py-4">
-                          <Link className="hover:text-blue-500" href={`/`}>
+                          <Link className="hover:text-blue-500" href={`/events/${event.id}`}>
                             {event.id}
                           </Link>
                         </td>
@@ -60,7 +62,8 @@ export default async function UsersPage() {
                           {event.date.toString().split(':00 GMT')[0]}
                         </td>
                         <td className="px-6 py-4">{event.status}</td>
-                        <td className="px-6 py-4">Edit</td>
+                        <td className="px-6 py-4"><EditEvent event={event}/></td>
+                        <td className="px-6 py-4"><DeleteEvent id={event.id}/></td>
                       </tr>
                     ))}
                   </tbody>

@@ -32,7 +32,7 @@ export default async function RootLayout({
             </div>
           </main>
         </SessionProvider>
-        
+      
       </body>
     </html>
   );
