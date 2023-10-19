@@ -10,7 +10,7 @@ import EditEvent from './edit';
 import DeleteEvent from './delete';
 
 export const metadata: Metadata = {
-  title: 'Users',
+  title: "Users",
 };
 
 export default async function UsersPage() {
@@ -19,64 +19,54 @@ export default async function UsersPage() {
 
   if (session && session.user.role) {
     return (
-      <>
-        <div className="fixed top-0 right-0 m-4">
+      <div className="flex flex-col p-4">
+        <div className="mb-2">
           <AddEvent />
         </div>
-        <div className="flex flex-col">
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-              <div className="overflow-hidden">
-                <table className="min-w-full text-left text-sm font-light">
-                  <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
-                    <tr>
-                      <th scope="col" className="px-6 py-4">
-                        Event ID
-                      </th>
-                      <th scope="col" className="px-6 py-4">
-                        Name
-                      </th>
-                      <th scope="col" className="px-6 py-4">
-                        Date
-                      </th>
-                      <th scope="col" className="px-6 py-4">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {allEvents.map((event) => (
-                      <tr
-                        key={event.id}
-                        className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700"
-                      >
-                        <td className="whitespace-nowrap px-6 py-4">
-                          <Link className="hover:text-blue-500" href={`/events/${event.id}`}>
-                            {event.id}
-                          </Link>
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {event.name}
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {event.date.toString().split(':00 GMT')[0]}
-                        </td>
-                        <td className="px-6 py-4">{event.status}</td>
-                        <td className="px-6 py-4"><EditEvent event={event}/></td>
-                        <td className="px-6 py-4"><DeleteEvent id={event.id}/></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <div className="flex w-full overflow-x-auto">
+          <table className="table-zebra table">
+            <thead>
+              <tr>
+                <th>Event ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allEvents.map((event) => (
+                <tr key={event.id}>
+                  <td>
+                    <Link href={`/events/${event.id}`}>{event.id}</Link>
+                  </td>
+                  <td>{event.name}</td>
+                  <td>{event.date.toString().split(":00 GMT")[0]}</td>
+                  <td>{event.status === "ONGOING"? (
+                    <div className="badge badge-warning">{event.status}</div>
+                  ) : ""} 
+                  {event.status === "COMPLETED"? (
+                    <div className="badge badge-success">{event.status}</div>
+                  ) : ""}
+                  {event.status === "CANCELLED"? (
+                    <div className="badge badge-error">{event.status}</div>
+                  ) : ""}
+                  {event.status === "PLANNED"? (
+                    <div className="badge badge-primary">{event.status}</div>
+                  ) : ""}
+                  </td>
+                  <td><EditEvent event={event}/></td>
+                  <td><DeleteEvent id={event.id}/></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </>
+      </div>
     );
-  } else if (session && session.user.role === 'USER') {
+  } else if (session && session.user.role === "USER") {
     return <NotFound />;
   } else {
-    redirect('/login');
+    redirect("/login");
   }
 }

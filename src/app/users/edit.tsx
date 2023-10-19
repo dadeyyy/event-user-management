@@ -121,20 +121,22 @@ function EditUser({ user }: EditUserProps) {
               <option value="ADMIN">ADMIN</option>
             </select>
           </div>
+          <div className="flex flex-row w-full gap-1 mt-2">
           <button
             disabled={isSubmitting}
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary w-full disabled:bg-gray-400"
           >
-            Save Changes
+            Save
           </button>
 
           <button
           onClick={closeModal}
-          className="btn btn-error btn-sm w-1/5"
+          className="btn btn-error w-full"
         >
           Close
         </button>
+        </div>
         </form>
 
        
