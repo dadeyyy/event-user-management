@@ -6,8 +6,13 @@ import { TeventSchema, eventSchema } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import {Event} from "@prisma/client"
 
-function AddEvent() {
+type EditEventProps= {
+    event: Event
+}
+
+function AddEvent({event}:EditEventProps) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -21,7 +26,7 @@ function AddEvent() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isLoading },
+    formState: { errors, isSubmitting },
     reset,
     setError,
   } = useForm<TeventSchema>({
@@ -29,32 +34,35 @@ function AddEvent() {
   });
 
   const onSubmit = async (data: TeventSchema) => {
-    const response = await fetch('/api/server/addEvent', {
-      method: 'POST',
+    
+    const response = await fetch('/api/server/editEvent', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        id: event.id
+      }),
     });
     const responseData = await response.json();
     console.log(responseData)
 
     if (responseData.error) {
       const { error } = responseData;
-      console.log(error);
       toast.error(`${error}`);
       return;
     }
-    toast.success('Successfully created a new event!');
+    toast.success('Successfully edited user!');
     closeModal();
     router.refresh();
     return;
   };
 
   return (
-    <div className="AddEvent">
-      <button onClick={openModal} className="btn btn-primary">
-        Add Event
+    <div className="EditEvent">
+      <button onClick={openModal} >
+        Edit
       </button>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -62,14 +70,14 @@ function AddEvent() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-y-2"
         >
-          <h1 className="text-center font-bold">ADD EVENT</h1>
           <div>
             <label htmlFor="username">Name</label>
             <input
+              defaultValue={event.name}
               id="name"
               type="text"
               placeholder="Name"
-              className="input input-solid max-w-full"
+              className="px-4 py-2 rounded"
               {...register('name')}
             />
             {errors.name && (
@@ -80,10 +88,11 @@ function AddEvent() {
           <div>
             <label htmlFor="date">Date:</label>
             <input
+              defaultValue={event.date.toString()}
               id="date"
               type="date"
               placeholder="date"
-              className="input input-solid max-w-full"
+              className="px-4 py-2 rounded"
               {...register('date')}
             />
             {errors.date && (
@@ -94,31 +103,28 @@ function AddEvent() {
 
           <div>
             <label htmlFor="status">Status</label>
-            <select className='select select-solid max-w-full' id="status" defaultValue="PLANNED" {...register('status')}>
+            <select id="status" defaultValue={event.status} {...register('status')}>
               <option value="PLANNED">PLANNED</option>
               <option value="ONGOING">ONGOING</option>
               <option value="COMPLETED">COMPLETED</option>
               <option value="CANCELLED">CANCELLED</option>
             </select>
           </div>
-          <div className="flex flex-row w-full gap-1 mt-2">
           <button
             disabled={isSubmitting}
             type="submit"
-            className="btn btn-primary w-full disabled:bg-gray-400"
+            className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
           >
-            Add
+            Submit
           </button>
-          <button
-          onClick={closeModal}
-          className="btn btn-error w-full"
-        >
-          Close
-        </button>
-        </div>
         </form>
 
-        
+        <button
+          onClick={closeModal}
+          className="bg-gray-300 text-gray-700 px-3 py-1 mt-4"
+        >
+          Close Modal
+        </button>
       </Modal>
     </div>
   );

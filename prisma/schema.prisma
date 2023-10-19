@@ -64,7 +64,7 @@ model Employee{
 
 model EventAttendee {
   id Int @id @default(autoincrement())
-  employee Employee @relation(fields: [employee_id], references: [id])
+  employee Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade)
   employee_id Int
   event_id Int
   event Event @relation(fields: [event_id], references: [id])

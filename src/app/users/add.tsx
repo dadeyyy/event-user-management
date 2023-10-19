@@ -116,16 +116,18 @@ function AddUser() {
               <option value="ADMIN">ADMIN</option>
             </select>
           </div>
+          <div className="flex flex-row w-full gap-1 mt-2">
           <button
             disabled={isSubmitting}
             type="submit"
-            className="btn btn-primary max-w-full disabled:bg-gray-300"
+            className="btn btn-primary w-full disabled:bg-gray-400"
           >
             Add
           </button>
-          <button onClick={closeModal} className="btn btn-error btn-sm w-1/5">
-            Close
+          <button onClick={closeModal} className="btn btn-error w-full">
+            Cancel
           </button>
+          </div>
         </form>
       </Modal>
     </div>

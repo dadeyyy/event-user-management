@@ -26,7 +26,7 @@ function AddEmployee() {
 
   return (
     <div className="AddEmployee">
-      <button onClick={openModal} className="bg-blue-500 text-white p-2">
+      <button onClick={openModal} className="btn btn-primary">
         Add Employee
       </button>
 

@@ -5,7 +5,7 @@ import SignOut from "./sign-out";
 import { useSession } from "next-auth/react";
 import { useActivePath } from "@/app/helper";
 
-function SideNav() {
+export default function NavDrawer() {
   const { data: session } = useSession();
   const checkActivePath = useActivePath();
 
@@ -20,11 +20,39 @@ function SideNav() {
   ];
   const events: NavigationItem[] = [{ href: "/events", name: "Events" }];
 
-  if (session && session.user) {
-    return (
-      <div className="flex flex-row gap-10 phone:hidden tablet:hidden laptop:flex desktop:flex">
-        <div className="w-full max-w-[18rem]">
-          <aside className="sidebar h-screen justify-start w-56 shadow-lg">
+  return (
+    <>
+      <input type="checkbox" id="drawer-left" className="drawer-toggle" />
+
+      <label
+        htmlFor="drawer-left"
+        className="btn btn-primary bg-inherit p-0 mt-4 text-black "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      </label>
+      <label className="overlay shadow-lg" htmlFor="drawer-left"></label>
+      <div className="drawer">
+        <div className="drawer-content pt-10 flex flex-col h-full">
+          <label
+            htmlFor="drawer-left"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <div>
             <section className="sidebar-title items-center p-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,9 +78,9 @@ function SideNav() {
             <section className="sidebar-content h-fit min-h-[20rem] overflow-visible">
               <nav className="menu-rounded md">
                 <ul className="menu-items p-2">
-                  {session.user.role === "ADMIN" &&
+                  {session?.user.role === "ADMIN" &&
                     users.map(({ href, name }) => (
-                      <Link 
+                      <Link
                         key={href}
                         href={href}
                         className={
@@ -62,6 +90,7 @@ function SideNav() {
                         }
                       >
                         <li
+              
                           key={href}
                           className="menu-item hover:bg-slate-200  "
                         >
@@ -85,8 +114,8 @@ function SideNav() {
                     ))}
 
                   {events.map(({ href, name }) => (
-                    <Link 
-                      key={href}
+                    <Link
+                    key={href}
                       href={href}
                       className={
                         checkActivePath(href)
@@ -145,7 +174,7 @@ function SideNav() {
                     </Link>
                   ))}
 
-                  <Link  href="#">
+                  <Link href="#">
                     <li className="menu-item hover:bg-red-500 hover:text-slate-50">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -169,17 +198,9 @@ function SideNav() {
                 </ul>
               </nav>
             </section>
-          </aside>
+          </div>
         </div>
       </div>
-    );
-  }
-}
-
-export default function NavMenu() {
-  return (
-    <div>
-      <SideNav />
-    </div>
+    </>
   );
 }

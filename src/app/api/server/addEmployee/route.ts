@@ -4,7 +4,6 @@ import { hash } from 'bcrypt';
 import { TEmployeeSchema, employeeSchema } from '@/lib/types';
 import { revalidatePath } from 'next/cache';
 
-//User validation schema with zod
 
 export async function POST(request: Request) {
   try {
