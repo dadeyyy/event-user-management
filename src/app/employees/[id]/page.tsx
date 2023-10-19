@@ -12,7 +12,7 @@ export default function GenerateQRPage({
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="card shadow-lg">
+      <div className="card border-solid border-slate-900">
         <div className="card-body flex items-center justify-center">
           <QRCode id={id} />
         </div>

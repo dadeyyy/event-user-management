@@ -1,11 +1,14 @@
-import Link from "next/link"
+import Link from "next/link";
 export default async function NotFound() {
-  console.log
   return (
-    <main className="text-center">
-        <h2 className="text-3xl">There was a problem</h2>
-        <p>We could not find the page you were looking for</p>
-        <p>Go <Link href='/'>Back</Link></p>
-    </main>
-  )
+    <div className="flex flex-col items-center justify-center h-full w-full">
+      <span className="text-[190px] text-blue-600 font-bold drop-shadow-lg ">
+        404
+      </span>
+      <span className="text-[25px] font-bold">Oops page not found!</span>
+      <p className="btn btn-primary mt-2">
+        <Link href="/">Go Back</Link>
+      </p>
+    </div>
+  );
 }

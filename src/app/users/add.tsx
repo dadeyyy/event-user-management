@@ -71,6 +71,7 @@ function AddUser() {
               placeholder="Username"
               className="input input-solid max-w-full"
               {...register("username")}
+              required
             />
             {errors.username && (
               <p className="text-red-500">{`${errors.username.message}`}</p>
@@ -85,6 +86,7 @@ function AddUser() {
               placeholder="password"
               className="input input-solid max-w-full"
               {...register("password")}
+              required
             />
             {errors.password && (
               <p className="text-red-500">{`${errors.password.message}`}</p>
@@ -98,6 +100,7 @@ function AddUser() {
               placeholder="Email"
               className="input input-solid max-w-full"
               {...register("email")}
+              required
             />
             {errors.email && (
               <p className="text-red-500">{`${errors.email.message}`}</p>
@@ -111,22 +114,23 @@ function AddUser() {
               id="role"
               defaultValue="USER"
               {...register("role")}
+              required
             >
               <option value="USER">USER</option>
               <option value="ADMIN">ADMIN</option>
             </select>
           </div>
           <div className="flex flex-row w-full gap-1 mt-2">
-          <button
-            disabled={isSubmitting}
-            type="submit"
-            className="btn btn-primary w-full disabled:bg-gray-400"
-          >
-            Add
-          </button>
-          <button onClick={closeModal} className="btn btn-error w-full">
-            Cancel
-          </button>
+            <button
+              disabled={isSubmitting}
+              type="submit"
+              className="btn btn-primary w-full disabled:bg-gray-400"
+            >
+              Add
+            </button>
+            <button onClick={closeModal} className="btn btn-error w-full">
+              Cancel
+            </button>
           </div>
         </form>
       </Modal>

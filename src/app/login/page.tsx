@@ -29,7 +29,7 @@ export default async function LogIn() {
 
   return (
     <>
-      <h1>Already logged in!</h1>
+      <h1 className="font-bold">Already logged in</h1>
     </>
   );
 }

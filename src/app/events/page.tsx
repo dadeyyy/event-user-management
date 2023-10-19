@@ -19,8 +19,8 @@ export default async function UsersPage() {
     return (
       <div className="flex flex-col p-4">
         <div className="mb-2">
-          <AddEvent />
-        </div>
+        <AddEvent />
+      </div>
         <div className="flex w-full overflow-x-auto">
           <table className="table-zebra table">
             <thead>

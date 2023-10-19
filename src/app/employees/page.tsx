@@ -21,9 +21,9 @@ export default async function EmployeesPage() {
   if (session && session.user.role) {
     return (
       <div className="flex flex-col p-4">
-        <div className="mb-2">
-          <AddEmployee />
-        </div>
+         <div className="mb-2">
+        <AddEmployee />
+      </div>
         <div className="flex w-full overflow-x-auto">
           <table className="table-zebra table">
             <thead>
@@ -83,8 +83,6 @@ export default async function EmployeesPage() {
           </table>
         </div>
       </div>
-
-      
     );
   } else if (session && session.user.role === "USER") {
     return <NotFound />;
