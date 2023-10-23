@@ -24,21 +24,22 @@ export default async function UsersPage() {
         <AddEvent />
       </div>
         <div className="flex w-full overflow-x-auto">
-          <table className="table-zebra table">
+          <table className="table-hover table">
             <thead>
               <tr>
                 <th>Event ID</th>
                 <th>Name</th>
                 <th>Date</th>
                 <th>Status</th>
-                <th>Edit</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               {allEvents.map((event) => (
                 <tr key={event.id}>
                   <td>
-                    <Link href={`/events/${event.id}`}>{event.id}</Link>
+                    <Link href={`/events/${event.id}`} className='badge '>{event.id}</Link>
                   </td>
                   <td>{event.name}</td>
                   <td>{event.date.toString().split(":00 GMT")[0]}</td>

@@ -62,7 +62,7 @@ function EditUser({ user }: EditUserProps) {
   return (
     <div className="AddUser">
       <button className="badge badge-flat-success" onClick={openModal}>
-        Edit User
+        Edit
       </button>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>

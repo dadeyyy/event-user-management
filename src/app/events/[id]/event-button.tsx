@@ -40,16 +40,16 @@ export default function EventButton({ status, eventID }: EventButtonProps) {
 
   if (eventStatus === 'PLANNED') {
     return (
-      <div>
+      <div className=' flex gap-2'>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn btn-primary"
           value="start"
           onClick={onClickHandler}
         >
           Start
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn"
           value="cancel"
           onClick={onClickHandler}
         >
@@ -59,23 +59,23 @@ export default function EventButton({ status, eventID }: EventButtonProps) {
     );
   } else if (eventStatus === 'ONGOING') {
     return (
-      <div>
+      <div className='flex gap-2'>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn btn-error"
           value="stop"
           onClick={onClickHandler}
         >
           Stop
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn"
           value="cancel"
           onClick={onClickHandler}
         >
           Cancel
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn btn-success"
           value="done"
           onClick={onClickHandler}
         >
@@ -87,7 +87,7 @@ export default function EventButton({ status, eventID }: EventButtonProps) {
     return (
       <div>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn btn-primary"
           value="start"
           onClick={onClickHandler}
         >
@@ -96,7 +96,7 @@ export default function EventButton({ status, eventID }: EventButtonProps) {
       </div>
     );
   } else if (eventStatus === 'COMPLETED') {
-    return <h1>COMPLETED!!!!</h1>;
+    return <h1 className='badge badge-success'>COMPLETED</h1>;
   }
   else{
     return <h1>Can't return anything!</h1>

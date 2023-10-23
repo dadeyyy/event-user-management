@@ -61,7 +61,7 @@ function AddEvent({event}:EditEventProps) {
 
   return (
     <div className="EditEvent">
-      <button onClick={openModal} >
+      <button className='badge badge-flat-success' onClick={openModal} >
         Edit
       </button>
 
@@ -70,14 +70,15 @@ function AddEvent({event}:EditEventProps) {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-y-2"
         >
-          <div>
+          <h1 className="text-center font-bold">EDIT EVENT</h1>
+          <div className='grid grid-cols-1'>
             <label htmlFor="username">Name</label>
             <input
               defaultValue={event.name}
               id="name"
               type="text"
               placeholder="Name"
-              className="px-4 py-2 rounded"
+              className="input input-solid max-w-full"
               {...register('name')}
             />
             {errors.name && (
@@ -85,14 +86,14 @@ function AddEvent({event}:EditEventProps) {
             )}
           </div>
 
-          <div>
+          <div className='grid grid-col-1'>
             <label htmlFor="date">Date:</label>
             <input
               defaultValue={event.date.toString()}
               id="date"
               type="date"
               placeholder="date"
-              className="px-4 py-2 rounded"
+              className="input input-solid max-w-full"
               {...register('date')}
             />
             {errors.date && (
@@ -101,30 +102,33 @@ function AddEvent({event}:EditEventProps) {
           </div>
           
 
-          <div>
+          <div className='grid grid-cols-1'>
             <label htmlFor="status">Status</label>
-            <select id="status" defaultValue={event.status} {...register('status')}>
+            <select className='select select-solid max-w-full' id="status" defaultValue={event.status} {...register('status')}>
               <option value="PLANNED">PLANNED</option>
               <option value="ONGOING">ONGOING</option>
               <option value="COMPLETED">COMPLETED</option>
               <option value="CANCELLED">CANCELLED</option>
             </select>
           </div>
+          <div className='grid grid-cols-2 gap-1'>
           <button
             disabled={isSubmitting}
             type="submit"
-            className="bg-blue-500 disabled:bg-gray-500 py-2 rounded"
+            className="btn btn-primary"
           >
-            Submit
+            Save
           </button>
+          <button
+          onClick={closeModal}
+          className="btn btn-error"
+        >
+          Cancel
+        </button>
+        </div>
         </form>
 
-        <button
-          onClick={closeModal}
-          className="bg-gray-300 text-gray-700 px-3 py-1 mt-4"
-        >
-          Close Modal
-        </button>
+        
       </Modal>
     </div>
   );

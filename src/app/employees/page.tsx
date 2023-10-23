@@ -23,7 +23,7 @@ export default async function EmployeesPage() {
         <AddEmployee />
       </div>
         <div className="flex w-full overflow-x-auto">
-          <table className="table-zebra table">
+          <table className="table-hover table">
             <thead>
               <tr>
                 <th>Employee ID</th>

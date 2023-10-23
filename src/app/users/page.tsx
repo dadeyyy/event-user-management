@@ -29,15 +29,15 @@ export default async function UsersPage() {
         <AddUser />
       </div>
       <div className="flex w-full overflow-x-auto">
-        <table className="table-zebra table">
+        <table className="table-hover table">
           <thead>
             <tr>
               <th>User ID</th>
               <th>Username</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Delete</th>
-              <th>Edit</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -61,10 +61,10 @@ export default async function UsersPage() {
                   )}
                 </td>
                 <td>
-                  <DeleteUser id={user.id} />
+                <EditUser user={user} />  
                 </td>
                 <td>
-                  <EditUser user={user} />
+                <DeleteUser id={user.id} />
                 </td>
               </tr>
             ))}

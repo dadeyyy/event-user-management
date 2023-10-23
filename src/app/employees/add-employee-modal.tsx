@@ -195,7 +195,7 @@ const AddEmployeeModal = ({ closeModal, open }: AddEmployeeProps) => {
           </div>
         </div>
 
-        <div className="flex flex-row w-full gap-1">
+        <div className="grid grid-cols-2 gap-1">
           <button
             disabled={isSubmitting}
             onClick={() => {

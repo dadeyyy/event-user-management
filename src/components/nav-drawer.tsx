@@ -20,6 +20,7 @@ export default function NavDrawer() {
   ];
   const events: NavigationItem[] = [{ href: "/events", name: "Events" }];
 
+  if (session && session.user){
   return (
     <>
       <input type="checkbox" id="drawer-left" className="drawer-toggle" />
@@ -201,6 +202,8 @@ export default function NavDrawer() {
           </div>
         </div>
       </div>
-    </>
+    </> 
   );
 }
+}
+

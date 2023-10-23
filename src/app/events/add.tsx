@@ -108,7 +108,7 @@ function AddEvent() {
               <option value="CANCELLED">CANCELLED</option>
             </select>
           </div>
-          <div className="flex flex-row w-full gap-1 mt-2">
+          <div className="grid grid-cols-2 gap-1">
             <button
               disabled={isSubmitting}
               type="submit"
